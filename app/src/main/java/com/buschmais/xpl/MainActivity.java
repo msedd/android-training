@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,6 +59,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         textView = (TextView)findViewById(R.id.textView2);
 
         searchField = (TextView)findViewById(R.id.textView);
+
+        SharedPreferences preferences = getSharedPreferences("MyPrefs",0);
+        searchField.setText(preferences.getString("searchstring", null)); 
 
 
         adapter = new WeatherListAdapter(this,R.layout.list_item,list);
@@ -151,6 +155,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
             task.execute();
 
             textView.setText(searchField.getText());
+            SharedPreferences preferences = getSharedPreferences("MyPrefs",0);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("searchstring",searchField.getText().toString());
+            editor.commit();
             //list.add(searchField.getText().toString());
             searchField.setText("");
 

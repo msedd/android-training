@@ -12,5 +12,6 @@
     <string name="dialog_button_ok">ok</string>
     <string name="dialog_button_nok">cancel</string>
     <string name="button_nachtmodus">Nachtmodus</string>
+    <string name="key_searchstring">key_searchstring_prev</string>
 
 </resources>
