@@ -37,9 +37,15 @@
         android:text=""
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_nachtmodus"
+        android:id="@+id/button_night"/>
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>
 

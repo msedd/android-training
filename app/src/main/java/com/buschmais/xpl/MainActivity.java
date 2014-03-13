@@ -1,7 +1,10 @@
 package com.buschmais.xpl;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.UiModeManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity implements View.OnClickListener, OnTaskCompleted {
+public class MainActivity extends Activity implements View.OnClickListener, DialogInterface.OnClickListener, OnTaskCompleted {
 
 
     TextView textView;
@@ -39,6 +42,16 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTa
         if(savedInstanceState != null && savedInstanceState.getSerializable("liste")!=null){
             list = (ArrayList<Weather>) savedInstanceState.getSerializable("liste");
         }
+
+        Button button_night = (Button) findViewById(R.id.button_night);
+        button_night.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UiModeManager  mgr = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+                mgr.enableCarMode(0);
+                mgr.setNightMode(UiModeManager.MODE_NIGHT_YES);
+            }
+        });
 
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
@@ -62,26 +75,9 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTa
 
         Log.d(MainActivity.class.getName(),"onClick: ");
 
+        MyDialog d = new MyDialog();
+        d.show(getFragmentManager(),"Result");
 
-
-
-        String search = searchField.getText().toString();
-        if(search != null && !search.isEmpty()){
-
-
-            AsyncTask task = new MyTask(this,search,this);
-            task.execute();
-
-            textView.setText(searchField.getText());
-            //list.add(searchField.getText().toString());
-            searchField.setText("");
-
-
-        }
-        else{
-            Toast toast = Toast.makeText(this, getString(R.string.error_empty_city),Toast.LENGTH_LONG);
-            toast.show();
-        }
 
     }
 
@@ -142,5 +138,27 @@ public class MainActivity extends Activity implements View.OnClickListener, OnTa
 
         list.add((Weather) object);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+
+        String search = searchField.getText().toString();
+        if(search != null && !search.isEmpty()){
+
+
+            AsyncTask task = new MyTask(this,search,this);
+            task.execute();
+
+            textView.setText(searchField.getText());
+            //list.add(searchField.getText().toString());
+            searchField.setText("");
+
+
+        }
+        else{
+            Toast toast = Toast.makeText(this, getString(R.string.error_empty_city),Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }

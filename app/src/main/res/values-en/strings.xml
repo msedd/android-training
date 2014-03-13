@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Hallo Werlt</string>
-    <string name="hello_world">Hallo Werlt</string>
-    <string name="action_settings">Einstellungen</string>
+    <string name="app_name">Hello World</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
     <string name="new_text">Text...</string>
-    <string name="button_text">suchen</string>
-    <string name="error_empty_city">Bitte Ort eingeben!</string>
-    <string name="hint_edit">Ort eingeben</string>
+    <string name="button_text">search</string>
+    <string name="error_empty_city">Insert city please!</string>
+    <string name="hint_edit">Insert city</string>
     <string name="dialog_message">Suche nach Stadt</string>
     <string name="dialog_button_ok">ok</string>
     <string name="dialog_button_nok">cancel</string>
