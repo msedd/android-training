@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +27,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
 
     TextView textView;
     TextView searchField;
-    ArrayList<Weather> list = new ArrayList<Weather>();
-    WeatherListAdapter adapter;
+
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putSerializable("liste",list);
     }
 
     @Override
@@ -40,9 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(savedInstanceState != null && savedInstanceState.getSerializable("liste")!=null){
-            list = (ArrayList<Weather>) savedInstanceState.getSerializable("liste");
-        }
+
 
         //
         // CAR + Nachtmodus einschalten
@@ -64,14 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
         searchField = (TextView)findViewById(R.id.textView);
 
         SharedPreferences preferences = getSharedPreferences("MyPrefs",0);
-        searchField.setText(preferences.getString("searchstring", null)); 
-
-
-        adapter = new WeatherListAdapter(this,R.layout.list_item,list);
-
-                //(this,R.layout.list_item,R.id.list_item,list);
-        ListView listView = (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
+        searchField.setText(preferences.getString("searchstring", null));
 
     }
 
@@ -143,8 +133,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
     @Override
     public void onTaskCompleted(Object object) {
 
-        list.add((Weather) object);
-        adapter.notifyDataSetChanged();
+        Intent intent = new Intent(this,WeatherActivity.class);
+
+        intent.putExtra("weather",(Weather) object);
+
+        startActivity(intent);
+
+        //
+        // wird jetzt von der neuen Activity erledigt
+        //
+        //list.add((Weather) object);
+        //adapter.notifyDataSetChanged();
     }
 
     @Override
