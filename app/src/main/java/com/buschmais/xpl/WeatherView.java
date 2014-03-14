@@ -23,6 +23,8 @@ public class WeatherView extends FrameLayout{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.weather_layout,this,true);
 
+        String title = typedArray.getString(R.styleable.WeatherView_weather_title);
+
     }
 
     public void setWeather(Weather aWeather) {

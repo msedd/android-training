@@ -33,7 +33,7 @@ public class MyTask extends AsyncTask{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog.show();
+        //progressDialog.show();
     }
 
     @Override
