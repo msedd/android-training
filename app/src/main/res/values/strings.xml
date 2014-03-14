@@ -14,5 +14,6 @@
     <string name="button_nachtmodus">Nachtmodus</string>
     <string name="key_searchstring">key_searchstring_prev</string>
     <string name="title_activity_weather">WeatherActivity</string>
+    <string name="weather_view">Wetter View</string>
 
 </resources>

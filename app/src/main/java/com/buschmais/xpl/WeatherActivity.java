@@ -10,34 +10,23 @@ import java.util.ArrayList;
 
 public class WeatherActivity extends Activity {
 
-    ArrayList<Weather> list = new ArrayList<Weather>();
-    WeatherListAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-        if(savedInstanceState != null && savedInstanceState.getSerializable("liste")!=null){
-            list = (ArrayList<Weather>) savedInstanceState.getSerializable("liste");
-        }
-
 
         Weather weather  = (Weather) getIntent().getSerializableExtra("weather");
-        list.add(weather);
 
-        adapter = new WeatherListAdapter(this,R.layout.list_item,list);
-
-        //(this,R.layout.list_item,R.id.list_item,list);
-        ListView listView = (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
+       WeatherView  weatherView = (WeatherView) findViewById(R.id.weater_view);
+        weatherView.setWeather(weather);
 
     }
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putSerializable("liste",list);
+
     }
 
 
