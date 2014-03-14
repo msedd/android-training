@@ -44,6 +44,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Dial
             list = (ArrayList<Weather>) savedInstanceState.getSerializable("liste");
         }
 
+        //
+        // CAR + Nachtmodus einschalten
+        //
         Button button_night = (Button) findViewById(R.id.button_night);
         button_night.setOnClickListener(new View.OnClickListener() {
             @Override
